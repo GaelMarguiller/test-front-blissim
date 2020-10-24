@@ -26,7 +26,7 @@ const  DefaultLayout = (props) => {
                     {props.children}
                 </main>
 
-                {/*Footer*/}
+                {/*footer*/}
                 <Footer/>
             </div>
         </ThemeProvider>
