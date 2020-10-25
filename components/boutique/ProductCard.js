@@ -5,7 +5,7 @@ import {
     CardMedia,
     Typography,
     withStyles,
-    IconButton
+    IconButton,
 } from '@material-ui/core'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -41,7 +41,7 @@ const useStyles = theme => ({
 const ProductCard = (props) => {
     const {classes, product} = props
     const context = useContext(GlobalContext);
-    const [isAddToWishlist, setToWishlist] = useState(context.isAddToWishlist);
+    const [isAddToWishlist, setToWishlist] = useState(product.isAddToWishlist);
 
     const handleAddToCart = (e, product) => {
         context.addProductToCart(product, context.pushObject('open_interstitial', true))
@@ -50,9 +50,11 @@ const ProductCard = (props) => {
     const handleClickWishlist = (e, product) => {
         e.preventDefault();
         if(isAddToWishlist === true) {
-            context.removeProductToWishlist(product, context.pushObject(setToWishlist(false)))
+            setToWishlist(false)
+            context.removeProductToWishlist(product, context.pushObject())
         } else {
-            context.addProductToWishlist(product, context.pushObject(setToWishlist(true)))
+            setToWishlist(true)
+            context.addProductToWishlist(product, context.pushObject())
         }
     }
     return (

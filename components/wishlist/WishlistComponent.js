@@ -40,7 +40,7 @@ const WishlistComponent = ({classes}) => {
                 Wishlist
             </Typography>
             <GridList cellHeight={380} className={classes.gridList} cols={5}>
-                {context.wishlist.map((product, index) => (
+                {context.wishlist.map((product) => (
                     <GridListTile key={product.image}>
                         <img src={product.image} alt={product.title} />
                         <GridListTileBar

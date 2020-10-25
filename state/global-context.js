@@ -1,14 +1,14 @@
-import {createContext, Component} from 'react';
+import React, {createContext, Component} from 'react';
 
 const GlobalContext = createContext();
 import PropTypes from 'prop-types';
+import {ContextDevTool, debugContextDevtool} from "react-context-devtool";
 
 export class GlobalProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open_interstitial: false,
-            isAddToWishlist: false,
             cart: [],
             wishlist: [],
             pushObject: this.pushObject.bind(this),
@@ -46,7 +46,6 @@ export class GlobalProvider extends Component {
     }
 
     addProductToCart(product, callback) {
-        console.log(product)
         const newCart = [...this.state.cart]
         newCart.push(product)
         this.setState({cart: newCart}, () => {
@@ -57,8 +56,8 @@ export class GlobalProvider extends Component {
     }
 
     addProductToWishlist(product, callback) {
-        console.log(product)
         const newCart = [...this.state.wishlist]
+        product.isAddToWishlist = true
         newCart.push(product)
         this.setState({wishlist: newCart}, () => {
             sessionStorage.setItem('wishlist', JSON.stringify(newCart));
@@ -79,9 +78,11 @@ export class GlobalProvider extends Component {
         });
     }
 
-    removeProductToWishlist(id, callback) {
+    removeProductToWishlist(product, callback) {
         const newCart = [...this.state.wishlist]
+        product.isAddToWishlist = false
         const ProductIndex = newCart.indexOf(p => {
+            console.log(p)
             p.id === id
         });
         newCart.splice(ProductIndex, 1)
@@ -110,6 +111,5 @@ export class GlobalProvider extends Component {
 GlobalProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
-
 export const GlobalConsumer = GlobalContext.Consumer;
 export default GlobalContext;
