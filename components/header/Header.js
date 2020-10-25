@@ -41,14 +41,16 @@ const Header = props => {
                                 </Typography>
                             </a>
                         </Link>
-                        <Link href="/wishlist">
-                            <IconButton>
-                                <FavoriteIcon style={{ color: '#ff0000' }}/>
+                        <div>
+                            <Link href="/wishlist">
+                                <IconButton>
+                                    <FavoriteIcon style={{ color: '#ff0000' }}/>
+                                </IconButton>
+                            </Link>
+                            <IconButton onClick={toggleDrawer(!context.open_interstitial)}>
+                                <ShoppingBasketIcon className={classes.cartIcon}/>
                             </IconButton>
-                        </Link>
-                        <IconButton onClick={toggleDrawer(!context.open_interstitial)}>
-                            <ShoppingBasketIcon className={classes.cartIcon}/>
-                        </IconButton>
+                        </div>
                     </Toolbar>
                 </Container>
             </AppBar>
