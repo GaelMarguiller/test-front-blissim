@@ -1,8 +1,9 @@
 import {withStyles, AppBar, Toolbar, Typography, IconButton, Container} from '@material-ui/core'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import Link from 'next/link'
 import Interstitial from '../Interstitial'
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import GlobalContext from "../../state/global-context";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
@@ -42,6 +43,11 @@ const Header = props => {
                             </a>
                         </Link>
                         <div>
+                            <Link href="/boutique">
+                                <IconButton>
+                                    <LocalGroceryStoreIcon className={classes.cartIcon}/>
+                                </IconButton>
+                            </Link>
                             <Link href="/wishlist">
                                 <IconButton>
                                     <FavoriteIcon style={{ color: '#ff0000' }}/>

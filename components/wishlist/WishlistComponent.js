@@ -6,8 +6,6 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import GridListTile from "@material-ui/core/GridListTile";
 import ClearIcon from '@material-ui/icons/Clear';
-import ListSubheader from "@material-ui/core/ListSubheader";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 const useStyles = theme => ({
     root: {

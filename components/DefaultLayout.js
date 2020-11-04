@@ -9,7 +9,13 @@ import theme from '../theme/theme';
 const useStyles = (theme) => ({
     root: {
         minHeight: "100vh",
+        display: 'flex',
+        flexDirection: 'column'
     },
+
+    main: {
+        flex: '1 0 auto',
+    }
 });
 
 const  DefaultLayout = (props) => {
@@ -22,7 +28,7 @@ const  DefaultLayout = (props) => {
                 {/*Header*/}
                 <Header/>
 
-                <main>
+                <main className={classes.main}>
                     {props.children}
                 </main>
 
