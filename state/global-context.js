@@ -3,6 +3,7 @@ import React, {createContext, Component} from 'react';
 const GlobalContext = createContext();
 import PropTypes from 'prop-types';
 import {ContextDevTool, debugContextDevtool} from "react-context-devtool";
+import {keys} from "@material-ui/core/styles/createBreakpoints";
 
 export class GlobalProvider extends Component {
     constructor(props) {
@@ -37,7 +38,6 @@ export class GlobalProvider extends Component {
 
     getWishlist() {
         const sessionStorageCart = JSON.parse(sessionStorage.getItem('wishItem')); // null if not exist
-
         if (sessionStorageCart !== null) {
             this.setState({wishlist: sessionStorageCart});
         } else {
@@ -57,8 +57,8 @@ export class GlobalProvider extends Component {
 
     addProductToWishlist(product, callback) {
         const newCart = [...this.state.wishlist]
-        product.isAddToWishlist = true
         newCart.push(product)
+        newCart.map(cart => {cart.isAddToWishlist = true})
         this.setState({wishlist: newCart}, () => {
             sessionStorage.setItem('wishlist', JSON.stringify(newCart));
             if (typeof callback !== 'undefined') callback();
@@ -80,12 +80,16 @@ export class GlobalProvider extends Component {
 
     removeProductToWishlist(product, callback) {
         const newCart = [...this.state.wishlist]
-        product.isAddToWishlist = false
-        const ProductIndex = newCart.indexOf(p => {
-            console.log(p)
-            p.id === id
-        });
-        newCart.splice(ProductIndex, 1)
+        newCart.map(cart => {
+            if(product.id === cart.id) {
+                cart.isAddToWishlist = false
+            }
+        })
+        for(const key in newCart){
+            if(newCart[key].id === product.id){
+                newCart.splice(parseInt(key), 1)
+            }
+        }
         this.setState({wishlist: newCart}, () => {
             sessionStorage.setItem('wishlist', JSON.stringify(newCart));
 
